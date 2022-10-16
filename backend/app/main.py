@@ -1,12 +1,20 @@
-from fastapi import FastAPI
-import uvicorn
+from fastapi import FastAPI, Request
+from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.openapi.utils import get_openapi
 
-app = FastAPI()
+app = FastAPI(
+    title="backend",
+    root_path="/api/v1"
+)
 
 @app.get("/")
 def hello_world():
     return "hello_world"
 
+@app.get("")
+def tmp():
+    return "hi"
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", reload=True, port=8888)
+@app.get("/api/v1/")
+def hi():
+    return "hellooo"
